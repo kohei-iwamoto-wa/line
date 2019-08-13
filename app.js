@@ -23,7 +23,7 @@ const app = new express();
 const port = 3000;
 
 // serve static files
-app.use('/static', express.static('static'));
+// app.use('/static', express.static('static'));
 
 // constants
 const SCHEDULE_START_MESSAGE = '登録';
@@ -70,8 +70,9 @@ function handleEvent(event) {
             switch (message.type) {
                 // handle Text message
                 case 'text':
-                schedule.scheduleRegist(message);
-                return handleText(message, event.replyToken, event.source);
+                // schedule.scheduleRegist(message);
+                return (handleText(message, event.replyToken, event.source),
+                    schedule.scheduleRegist(message));
                 // unknown message
                 default:
                     replyText(replyToken, 'よく分かりませんでした');
@@ -80,7 +81,6 @@ function handleEvent(event) {
         default:
             throw new Error(`Unknown event: ${JSON.stringify(event)}`);
     }
-    
 };
 
 function handleText(message, replyToken, event_source) {
@@ -90,7 +90,7 @@ function handleText(message, replyToken, event_source) {
 
     if (message_text === SCHEDULE_START_MESSAGE) {
         console.log('スケジュール入力');
-        schedule.scheduleRegist(message);
+        // schedule.scheduleRegist(message);
         return replyText(replyToken, 'スケジュールを入力してください');
 
     } else if (message_text === SCHEDULE_SHOW_MESSAGE) {
