@@ -22,9 +22,6 @@ const baseURL = process.env.BASE_URL;
 const app = new express();
 const port = 3000;
 
-// serve static files
-// app.use('/static', express.static('static'));
-
 // constants
 const SCHEDULE_START_MESSAGE = '登録';
 const SCHEDULE_SHOW_MESSAGE = '確認';
@@ -93,12 +90,12 @@ function handleText(message, replyToken, event_source) {
 
     } else if (message_text === SCHEDULE_SHOW_MESSAGE) {
         console.log('スケジュール確認');
-        //  schedule.scheduleConfirm();
-        console.log(schedule)
-       return replyText(replyToken, 'スケージュールだよ');
+        // console.log(schedule)
+       return replyText(replyToken, schedule.scheduleConfirm());
 
     } else if (message_text === SCHEDULE_DELETE_MESSAGE) {
         console.log('スケジュール削除');
+        schedule.scheduleDelete();
         return replyText(replyToken, 'スケジュール削除したよ');
     }
 };
