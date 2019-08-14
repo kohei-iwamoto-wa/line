@@ -70,7 +70,6 @@ function handleEvent(event) {
             switch (message.type) {
                 // handle Text message
                 case 'text':
-                // schedule.scheduleRegist(message);
                 return (handleText(message, event.replyToken, event.source),
                     schedule.scheduleRegist(message));
                 // unknown message
@@ -90,7 +89,6 @@ function handleText(message, replyToken, event_source) {
 
     if (message_text === SCHEDULE_START_MESSAGE) {
         console.log('スケジュール入力');
-        // schedule.scheduleRegist(message);
         return replyText(replyToken, 'スケジュールを入力してください');
 
     } else if (message_text === SCHEDULE_SHOW_MESSAGE) {
@@ -102,8 +100,6 @@ function handleText(message, replyToken, event_source) {
     } else if (message_text === SCHEDULE_DELETE_MESSAGE) {
         console.log('スケジュール削除');
         return replyText(replyToken, 'スケジュール削除したよ');
-    } else {
-        return replyText(replyToken, '知らない言葉です');
     }
 };
  

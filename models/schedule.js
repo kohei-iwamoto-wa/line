@@ -20,16 +20,22 @@ mongoose.connect('mongodb://localhost:27017/schedule', { useNewUrlParser: true }
 );
 
 module.exports.scheduleRegist = function (message){
-    let schedule = new Schedule({
-      title: message.text,
-      body: ''
-    });
+  
+  let schedule = new Schedule({
+    title: message.text,
+  });
+  if(schedule.title == '登録') {
+    console.log('保存しない');
+    console.log(schedule.title)
+  } else {
     schedule.save(err => {
-    console.log(schedule);
-      if (err) console.error(err)
-      console.log('saved')
-    mongoose.disconnect();
-  }); 
+    console.log('登録' + schedule);
+    if (err) console.error(err)
+    console.log('saved')
+    // mongoose.disconnect();
+  return schedule;
+    });
+  }
 }
 
 // Read
@@ -41,9 +47,3 @@ module.exports.scheduleConfirm = function (message){
       console.log(err);
   });
 }
-
-// delete
-
-
-
-//update
